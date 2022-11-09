@@ -9,6 +9,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import pymysql
 
 
 class Ui_Dialog(object):
@@ -18,6 +19,7 @@ class Ui_Dialog(object):
         Dialog.setMinimumSize(QtCore.QSize(520, 471))
         Dialog.setMaximumSize(QtCore.QSize(528, 16777215))
         Dialog.setStyleSheet("background-image: url(:/cat/photo/56ea04557da1b2cad74b5d3fcc08c3ff.jpg);")
+        
         self.listView = QtWidgets.QListView(Dialog)
         self.listView.setGeometry(QtCore.QRect(160, 40, 371, 301))
         self.listView.setStyleSheet("background-image: url(:/cat/photo/แมวส้ม-1.jpg);")
@@ -92,17 +94,16 @@ class Ui_Dialog(object):
 "background-image: url(:/cat/photo/ปุ่ม1.jpg);")
         self.plainTextEdit_6.setObjectName("plainTextEdit_6")
         self.listWidget = QtWidgets.QListWidget(Dialog)
-        self.listWidget.setGeometry(QtCore.QRect(0, 60, 531, 301))
+        self.listWidget.setGeometry(QtCore.QRect(30, 50, 531, 301))
         self.listWidget.setStyleSheet("background-image: url(:/cat/photo/5.jpg);")
         self.listWidget.setObjectName("listWidget")
-        self.textBrowser = QtWidgets.QTextBrowser(Dialog)
-        self.textBrowser.setGeometry(QtCore.QRect(150, 380, 256, 71))
-        self.textBrowser.setStyleSheet("background-image: url(:/cat/photo/ปุ่ม2.jpg);")
-        self.textBrowser.setObjectName("textBrowser")
         self.textBrowser_2 = QtWidgets.QTextBrowser(Dialog)
         self.textBrowser_2.setGeometry(QtCore.QRect(270, 360, 256, 71))
         self.textBrowser_2.setStyleSheet("background-image: url(:/cat/photo/ปุ่ม2.jpg);")
         self.textBrowser_2.setObjectName("textBrowser_2")
+        self.comboBox = QtWidgets.QComboBox(Dialog)
+        self.comboBox.setGeometry(QtCore.QRect(160, 380, 241, 71))
+        self.comboBox.setObjectName("comboBox")
         self.listView.raise_()
         self.plainTextEdit_3.raise_()
         self.plainTextEdit_4.raise_()
@@ -118,10 +119,10 @@ class Ui_Dialog(object):
         self.pushButton_14.raise_()
         self.pushButton_13.raise_()
         self.listView_5.raise_()
-        self.textBrowser.raise_()
         self.textBrowser_2.raise_()
         self.listView_6.raise_()
         self.listView_4.raise_()
+        self.comboBox.raise_()
 
         self.retranslateUi(Dialog)
         self.pushButton_4.clicked.connect(self.listView.show) # type: ignore
@@ -218,19 +219,35 @@ class Ui_Dialog(object):
         self.pushButton_5.clicked.connect(self.listWidget.close) # type: ignore
         self.pushButton_6.clicked.connect(self.listWidget.close) # type: ignore
         self.pushButton_7.clicked.connect(self.listWidget.close) # type: ignore
-        self.pushButton_9.clicked.connect(self.textBrowser.show) # type: ignore
-        self.pushButton_9.clicked.connect(self.textBrowser.show) # type: ignore
-        self.pushButton_5.clicked.connect(self.textBrowser.close) # type: ignore
-        self.pushButton_4.clicked.connect(self.textBrowser.close) # type: ignore
-        self.pushButton_6.clicked.connect(self.textBrowser.close) # type: ignore
-        self.pushButton_7.clicked.connect(self.textBrowser.close) # type: ignore
         self.pushButton_4.clicked.connect(self.textBrowser_2.show) # type: ignore
         self.pushButton_5.clicked.connect(self.textBrowser_2.close) # type: ignore
         self.pushButton_9.clicked.connect(self.textBrowser_2.close) # type: ignore
         self.pushButton_6.clicked.connect(self.textBrowser_2.close) # type: ignore
         self.pushButton_7.clicked.connect(self.textBrowser_2.close) # type: ignore
+        self.pushButton_9.clicked.connect(self.comboBox.show) # type: ignore
+        self.pushButton_5.clicked.connect(self.comboBox.close) # type: ignore
+        self.pushButton_4.clicked.connect(self.comboBox.close) # type: ignore
+        self.pushButton_6.clicked.connect(self.comboBox.close) # type: ignore
+        self.pushButton_7.clicked.connect(self.comboBox.close) # type: ignore
+        self.pushButton_13.clicked.connect(self.textBrowser_2.close) # type: ignore
+        self.pushButton_10.clicked.connect(self.comboBox.close) # type: ignore
+        self.pushButton_14.clicked.connect(self.comboBox.close) # type: ignore
+        self.ShowName()
         QtCore.QMetaObject.connectSlotsByName(Dialog)
 
+    def ShowName(self) :
+                name_id = []
+                self.db = pymysql.connect(host="127.0.0.1", database="name", user="root", password="1234", charset="utf8")
+
+                self.cur = self.db.cursor()
+                self.cur.execute('SELECT * FROM name_id;')
+
+                data = self.cur.fetchall()
+
+                for i in data :
+                        self.comboBox.addItem(i[1])
+                        self.comboBox.addItem(i[0])
+                        
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
         Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
@@ -293,20 +310,12 @@ class Ui_Dialog(object):
 "\n"
 "-รัสเซีย\n"
 "เลี้ยงแมว Russian Blue จะทำให้โชคดี"))
-        self.textBrowser.setHtml(_translate("Dialog", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:11pt;\">สมาชิก</span></p>\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:11pt;\">นายปิยะ หลามสกุล 116310462023-7</span></p>\n"
-"<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:11pt;\">น.ส.กวินธิดา สาขำ 116310400030-7</span></p></body></html>"))
         self.textBrowser_2.setHtml(_translate("Dialog", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
 "<p align=\"center\" style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p>\n"
 "<p align=\"center\" style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:18pt; font-weight:600; color:#966496;\">HELLO CATS</span></p></body></html>"))
-        
 import image_rc
 
 
